@@ -1,6 +1,6 @@
 import { siteConfig } from "@/config/site"
 import { Input, Textarea } from "@nextui-org/input"
-import { Button } from "@nextui-org/button"
+import { SubmitButton } from "@/components/SubmitButton"
 import { db } from "@/db"
 import { products } from "@/db/schema"
 import { redirect } from "next/navigation"
@@ -68,9 +68,7 @@ export default function AddProductPage() {
             </div>
           }
         />
-        <Button type="submit" color="warning" className="w-full">
-          Add Product
-        </Button>
+        <SubmitButton className="w-full">Add Product</SubmitButton>
       </form>
     </div>
   )
