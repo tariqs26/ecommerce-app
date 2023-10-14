@@ -65,6 +65,8 @@ export const products = pgTable("product", {
   description: text("description").notNull(),
   image: text("image").notNull(),
   price: numeric("price", { precision: 10, scale: 5 }).notNull(),
-  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
-  updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow()
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow().notNull(),
 })
+
+export type Product = typeof products.$inferSelect
