@@ -1,12 +1,15 @@
-import postgres from "postgres"
-import { migrate } from "drizzle-orm/postgres-js/migrator"
-import { drizzle } from "drizzle-orm/postgres-js"
+import { Pool } from "pg"
+import { migrate } from "drizzle-orm/node-postgres/migrator"
+import { drizzle } from "drizzle-orm/node-postgres"
+import "dotenv/config"
 
-const migrationClient = postgres(process.env.DATABASE_URL, { max: 1 })
+const client = new Pool({
+  connectionString: process.env.DATABASE_URL,
+})
 
 async function main() {
   console.log("Running migrations...")
-  await migrate(drizzle(migrationClient), {
+  await migrate(drizzle(client), {
     migrationsFolder: "drizzle",
   })
   console.log("Migrations complete!")
