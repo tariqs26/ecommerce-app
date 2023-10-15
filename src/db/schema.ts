@@ -7,6 +7,7 @@ import {
   integer,
   numeric,
 } from "drizzle-orm/pg-core"
+import { relations } from "drizzle-orm"
 import type { AdapterAccount } from "@auth/core/adapters"
 
 export const users = pgTable("user", {
@@ -70,3 +71,42 @@ export const products = pgTable("product", {
 })
 
 export type Product = typeof products.$inferSelect
+
+export const productsRelations = relations(products, ({ many }) => ({
+  cartItems: many(cartItems),
+}))
+
+export const carts = pgTable("cart", {
+  id: serial("id").primaryKey(),
+})
+
+export const cartsRelations = relations(carts, ({ many }) => ({
+  items: many(cartItems),
+}))
+
+
+export type Cart = typeof carts.$inferSelect
+
+export const cartItems = pgTable("cartItem", {
+  id: serial("id").primaryKey(),
+  productId: integer("product_id").references(() => products.id, {
+    onDelete: "cascade",
+  }),
+  cartId: integer("cart_id").references(() => carts.id, {
+    onDelete: "cascade",
+  }),
+  quantity: integer("quantity").notNull().default(1),
+})
+
+export type CartItem = typeof cartItems.$inferSelect
+
+export const cartItemsRelations = relations(cartItems, ({ one }) => ({
+  product: one(products, {
+    fields: [cartItems.productId],
+    references: [products.id],
+  }),
+  cart: one(carts, {
+    fields: [cartItems.id],
+    references: [carts.id],
+  }),
+}))
