@@ -9,15 +9,16 @@ const config: Config = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
-  theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+  plugins: [
+    nextui({
+      layout: {
+        radius: {
+          small: "0.25rem",
+          medium: "0.5rem",
+          large: "0.75rem",
+        },
       },
-    },
-  },
-  plugins: [nextui()],
+    }),
+  ],
 }
 export default config
