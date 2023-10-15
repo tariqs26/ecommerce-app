@@ -23,7 +23,7 @@ export default async function Home() {
           <div className="self-center space-y-4">
             <h1>{data[0].name}</h1>
             <p>{data[0].description}</p>
-            <Link href={`/products/${data[0].id}`}>
+            <Link href={`/products/${data[0].id}`} className="flex items-center">
               <Button color="warning">Check it out</Button>
             </Link>
           </div>
