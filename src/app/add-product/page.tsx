@@ -31,8 +31,8 @@ async function addProduct(data: FormData) {
 export default function AddProductPage() {
   return (
     <div>
-      <h1 className="text-lg mb-3 font-bold">Add Product</h1>
-      <form className="space-y-3" action={addProduct}>
+      <h1>Add Product</h1>
+      <form className="space-y-3 mt-4" action={addProduct}>
         <Input
           label="Name"
           name="name"
