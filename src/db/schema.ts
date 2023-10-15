@@ -91,10 +91,10 @@ export const cartItems = pgTable("cartItem", {
   id: serial("id").primaryKey(),
   productId: integer("product_id").references(() => products.id, {
     onDelete: "cascade",
-  }),
+  }).notNull(),
   cartId: integer("cart_id").references(() => carts.id, {
     onDelete: "cascade",
-  }),
+  }).notNull(),
   quantity: integer("quantity").notNull().default(1),
 })
 
