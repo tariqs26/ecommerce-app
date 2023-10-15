@@ -5,6 +5,8 @@ import { cache } from "react"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import { PriceTag } from "@/components/PriceTag"
+import { AddToCardButton } from "./AddToCartButton"
+import { incrementProductQuantity } from "./actions"
 
 type PageProps = {
   params: {
@@ -49,6 +51,10 @@ export default async function ProductPage({ params }: PageProps) {
         <h1>{product.name}</h1>
         <PriceTag price={product.price} className="mt-4" />
         <p className="py-6">{product.description}</p>
+        <AddToCardButton
+          productId={product.id}
+          incrementProductQuantity={incrementProductQuantity}
+        />
       </section>
     </article>
   )
