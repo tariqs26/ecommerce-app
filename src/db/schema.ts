@@ -84,17 +84,16 @@ export const cartsRelations = relations(carts, ({ many }) => ({
   items: many(cartItems),
 }))
 
-
 export type Cart = typeof carts.$inferSelect
 
 export const cartItems = pgTable("cartItem", {
   id: serial("id").primaryKey(),
-  productId: integer("product_id").references(() => products.id, {
+  productId: integer("product_id").notNull().references(() => products.id, {
     onDelete: "cascade",
-  }).notNull(),
-  cartId: integer("cart_id").references(() => carts.id, {
+  }),
+  cartId: integer("cart_id").notNull().references(() => carts.id, {
     onDelete: "cascade",
-  }).notNull(),
+  }),
   quantity: integer("quantity").notNull().default(1),
 })
 
